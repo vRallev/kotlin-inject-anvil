@@ -5,8 +5,15 @@ on:
     tags:
       - '*.*.*'
 
+permissions:
+  contents: read
+
 jobs:
   publish-release:
+    # Needed for creating the release: https://github.com/softprops/action-gh-release?tab=readme-ov-file#permissions
+    permissions:
+      contents: write
+
     runs-on: macos-latest
     if: github.repository == 'amzn/kotlin-inject-anvil'
     timeout-minutes: 45
