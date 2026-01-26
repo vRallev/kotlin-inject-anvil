@@ -44,10 +44,3 @@ dependencies {
     testImplementation libs.ksp
     testImplementation libs.ksp.embeddable
 }
-
-tasks.named("test").configure {
-    def useKsp2 = providers.gradleProperty('ksp.useKSP2')
-    doFirst {
-        logger.lifecycle("Using ksp2 = ${useKsp2.get()}")
-    }
-}
