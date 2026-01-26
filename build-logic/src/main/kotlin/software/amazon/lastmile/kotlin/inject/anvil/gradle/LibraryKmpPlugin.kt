@@ -65,6 +65,8 @@ open class LibraryKmpPlugin : Plugin<Project> {
             macosArm64()
             macosX64()
 
+            mingwX64()
+
             tvosArm64()
             tvosSimulatorArm64()
             tvosX64()
