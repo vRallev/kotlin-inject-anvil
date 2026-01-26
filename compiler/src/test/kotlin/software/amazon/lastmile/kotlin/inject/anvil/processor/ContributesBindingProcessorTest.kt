@@ -15,6 +15,7 @@ import org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi
 import org.junit.jupiter.api.Test
 import software.amazon.lastmile.kotlin.inject.anvil.LOOKUP_PACKAGE
 import software.amazon.lastmile.kotlin.inject.anvil.compile
+import software.amazon.lastmile.kotlin.inject.anvil.declaredNonSyntheticMethods
 import software.amazon.lastmile.kotlin.inject.anvil.generatedComponent
 import software.amazon.lastmile.kotlin.inject.anvil.inner
 import software.amazon.lastmile.kotlin.inject.anvil.isAnnotatedWith
@@ -44,7 +45,7 @@ class ContributesBindingProcessorTest {
             assertThat(generatedComponent.packageName).isEqualTo(LOOKUP_PACKAGE)
             assertThat(generatedComponent.origin).isEqualTo(impl)
 
-            val method = generatedComponent.declaredMethods.single()
+            val method = generatedComponent.declaredNonSyntheticMethods.single()
             assertThat(method.name).isEqualTo("provideImplBase")
             assertThat(method.parameters.single().type).isEqualTo(impl)
             assertThat(method.returnType).isEqualTo(base)
@@ -75,7 +76,7 @@ class ContributesBindingProcessorTest {
             assertThat(generatedComponent.packageName).isEqualTo(LOOKUP_PACKAGE)
             assertThat(generatedComponent.origin).isEqualTo(impl.inner)
 
-            val method = generatedComponent.declaredMethods.single()
+            val method = generatedComponent.declaredNonSyntheticMethods.single()
             assertThat(method.name).isEqualTo("provideImplInnerBase")
             assertThat(method.parameters.single().type).isEqualTo(impl.inner)
             assertThat(method.returnType).isEqualTo(base)
@@ -104,9 +105,9 @@ class ContributesBindingProcessorTest {
             class Impl2 : Base2 
             """,
         ) {
-            assertThat(impl.generatedComponent.declaredMethods.single().returnType)
+            assertThat(impl.generatedComponent.declaredNonSyntheticMethods.single().returnType)
                 .isEqualTo(base)
-            assertThat(impl2.generatedComponent.declaredMethods.single().returnType)
+            assertThat(impl2.generatedComponent.declaredNonSyntheticMethods.single().returnType)
                 .isEqualTo(base2)
         }
     }
@@ -264,7 +265,7 @@ class ContributesBindingProcessorTest {
             assertThat(generatedComponent.packageName).isEqualTo(LOOKUP_PACKAGE)
             assertThat(generatedComponent.origin).isEqualTo(impl)
 
-            val method = generatedComponent.declaredMethods.single()
+            val method = generatedComponent.declaredNonSyntheticMethods.single()
             assertThat(method.name).isEqualTo("provideImplBaseMultibinding")
             assertThat(method.parameters.single().type).isEqualTo(impl)
             assertThat(method.returnType).isEqualTo(base)
@@ -295,9 +296,9 @@ class ContributesBindingProcessorTest {
             assertThat(generatedComponent.packageName).isEqualTo(LOOKUP_PACKAGE)
             assertThat(generatedComponent.origin).isEqualTo(impl)
 
-            assertThat(generatedComponent.declaredMethods).hasSize(2)
+            assertThat(generatedComponent.declaredNonSyntheticMethods).hasSize(2)
 
-            val bindingMethod = generatedComponent.declaredMethods.first {
+            val bindingMethod = generatedComponent.declaredNonSyntheticMethods.first {
                 it.name == "provideImplBase"
             }
             assertThat(bindingMethod.parameters.single().type).isEqualTo(impl)
@@ -305,7 +306,7 @@ class ContributesBindingProcessorTest {
             assertThat(bindingMethod).isAnnotatedWith(Provides::class)
             assertThat(bindingMethod).isNotAnnotatedWith(IntoSet::class)
 
-            val multibindingBindingMethod = generatedComponent.declaredMethods.first {
+            val multibindingBindingMethod = generatedComponent.declaredNonSyntheticMethods.first {
                 it.name == "provideImplBaseMultibinding"
             }
             assertThat(multibindingBindingMethod.parameters.single().type).isEqualTo(impl)
@@ -397,7 +398,7 @@ class ContributesBindingProcessorTest {
             assertThat(generatedComponent.packageName).isEqualTo(LOOKUP_PACKAGE)
             assertThat(generatedComponent.origin).isEqualTo(impl)
 
-            val method = generatedComponent.declaredMethods.single()
+            val method = generatedComponent.declaredNonSyntheticMethods.single()
             assertThat(method.name).isEqualTo("provideImplBase")
             assertThat(method.returnType).isEqualTo(base)
             assertThat(method).isAnnotatedWith(Provides::class)
@@ -435,7 +436,7 @@ class ContributesBindingProcessorTest {
             assertThat(generatedComponent.packageName).isEqualTo(LOOKUP_PACKAGE)
             assertThat(generatedComponent.origin).isEqualTo(impl)
 
-            val method = generatedComponent.declaredMethods.single()
+            val method = generatedComponent.declaredNonSyntheticMethods.single()
             assertThat(method.name).isEqualTo("provideImplBase")
             assertThat(method.returnType).isEqualTo(base)
             assertThat(method).isAnnotatedWith(Provides::class)
@@ -473,7 +474,7 @@ class ContributesBindingProcessorTest {
             assertThat(generatedComponent.packageName).isEqualTo(LOOKUP_PACKAGE)
             assertThat(generatedComponent.origin).isEqualTo(impl)
 
-            val method = generatedComponent.declaredMethods.single()
+            val method = generatedComponent.declaredNonSyntheticMethods.single()
             assertThat(method.name).isEqualTo("provideImplBase")
             assertThat(method.parameters.single().type).isEqualTo(impl)
             assertThat(method.returnType).isEqualTo(base)
@@ -507,7 +508,7 @@ class ContributesBindingProcessorTest {
             assertThat(generatedComponent.packageName).isEqualTo(LOOKUP_PACKAGE)
             assertThat(generatedComponent.origin).isEqualTo(impl)
 
-            val method = generatedComponent.declaredMethods.single()
+            val method = generatedComponent.declaredNonSyntheticMethods.single()
             assertThat(method.name).isEqualTo("provideImplBase")
             assertThat(method.parameters.single().type).isEqualTo(impl)
             assertThat(method.returnType).isEqualTo(base)
@@ -542,7 +543,7 @@ class ContributesBindingProcessorTest {
             assertThat(generatedComponent.packageName).isEqualTo(LOOKUP_PACKAGE)
             assertThat(generatedComponent.origin).isEqualTo(impl)
 
-            val method = generatedComponent.declaredMethods.single()
+            val method = generatedComponent.declaredNonSyntheticMethods.single()
             assertThat(method.name).isEqualTo("provideImplBaseMultibinding")
             assertThat(method.parameters.single().type).isEqualTo(impl)
             assertThat(method.returnType).isEqualTo(base)
