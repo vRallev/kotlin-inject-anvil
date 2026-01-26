@@ -1,20 +1,19 @@
 [versions]
-agp = "8.9.2"
+agp = "8.12.3"
 android-compileSdk = "36"
 android-minSdk = "21"
 assertk = "0.28.1"
 auto-service = "1.1.1"
 auto-service-ksp = "1.2.0"
-build-config = "5.6.5"
 detekt = "1.23.8"
 junit-jupiter = "5.12.1"
-kotlin = "2.1.21"
-kotlin-compile-testing = "0.7.1"
+kotlin = "2.2.20"
+kotlin-compile-testing = "0.12.1"
 kotlin-hierarchy = "1.1"
 kotlin-inject = "0.9.0"
-kotlin-poet = "2.1.0"
-kotlinx-binaryCompatibilityValidator = "0.17.0"
-ksp = "2.1.21-2.0.1"
+kotlin-poet = "2.2.0"
+kotlinx-binaryCompatibilityValidator = "0.18.1"
+ksp = "2.3.4"
 ktlint-binary = "1.2.1"
 ktlint-gradle = "12.2.0"
 maven-publish = "0.32.0"
@@ -53,7 +52,6 @@ maven-publish-gradle-plugin = { module = "com.vanniktech:gradle-maven-publish-pl
 [plugins]
 android-app = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
-build-config = { id = "com.github.gmazzo.buildconfig", version.ref = "build-config" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 kotlin-hierarchy = { id = "io.github.terrakok.kmp-hierarchy", version.ref = "kotlin-hierarchy" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }

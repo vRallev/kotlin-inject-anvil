@@ -6,6 +6,11 @@
 
 ### Changed
 
+- No longer test KSP1.
+- Update to kotlin-inject `0.9.0`.
+- Update to Kotlin `2.2.20`.
+- Update to KotlinPoet `2.2.0`.
+
 ### Deprecated
 
 ### Removed
