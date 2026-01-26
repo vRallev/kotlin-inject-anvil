@@ -4,6 +4,8 @@
 
 ### Added
 
+- Add `mingwX64` target to `runtime` and `runtime-optional` artifacts.
+
 ### Changed
 
 - No longer test KSP1.
