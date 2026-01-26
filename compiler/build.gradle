@@ -7,6 +7,8 @@ test {
     useJUnitPlatform()
 
     maxHeapSize = "2g"
+
+    maxParallelForks = Runtime.getRuntime().availableProcessors() * 2
 }
 
 dependencies {
