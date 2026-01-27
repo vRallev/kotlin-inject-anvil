@@ -13,15 +13,10 @@ permissions:
 
 jobs:
   test:
-    name: assemble-and-test (KSP2=${{ matrix.use-ksp2 }})
+    name: assemble-and-test
 
     runs-on: macos-latest
     timeout-minutes: 25
-
-    strategy:
-      fail-fast: false
-      matrix:
-        use-ksp2: [ true, false ]
 
     steps:
       - uses: actions/checkout@v4
@@ -32,7 +27,7 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
 
       - name: Test on Mac
-        run: ./gradlew assemble test --stacktrace --show-version --continue -Pksp.useKSP2=${{ matrix.use-ksp2 }}
+        run: ./gradlew assemble test --stacktrace --show-version --continue
 
       - name: Upload Test Results
         uses: actions/upload-artifact@v4
