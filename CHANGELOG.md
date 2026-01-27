@@ -4,14 +4,7 @@
 
 ### Added
 
-- Add `mingwX64` target to `runtime` and `runtime-optional` artifacts.
-
 ### Changed
-
-- No longer test KSP1.
-- Update to kotlin-inject `0.9.0`.
-- Update to Kotlin `2.2.20`.
-- Update to KotlinPoet `2.2.0`.
 
 ### Deprecated
 
@@ -23,6 +16,22 @@
 
 ### Other Notes & Contributions
 
+## [0.1.7] - 2026-01-27
+
+### Added
+
+- Add `mingwX64` target to `runtime` and `runtime-optional` artifacts.
+
+### Changed
+
+- No longer test KSP1.
+- Update to kotlin-inject `0.9.0`.
+- Update to Kotlin `2.2.20`.
+- Update to KotlinPoet `2.2.0`.
+
+### Other Notes & Contributions
+
+Thanks to [@ZacSweers](https://github.com/ZacSweers) for contributing to this release!
 
 ## [0.1.6] - 2025-05-27
 
@@ -155,7 +164,8 @@
 
 - Initial release.
 
-[Unreleased]: https://github.com/amzn/kotlin-inject-anvil/compare/0.1.6...HEAD
+[Unreleased]: https://github.com/amzn/kotlin-inject-anvil/compare/0.1.7...HEAD
+[0.1.7]: https://github.com/square/anvil/releases/tag/0.1.7
 [0.1.6]: https://github.com/square/anvil/releases/tag/0.1.6
 [0.1.5]: https://github.com/square/anvil/releases/tag/0.1.5
 [0.1.4]: https://github.com/square/anvil/releases/tag/0.1.4
