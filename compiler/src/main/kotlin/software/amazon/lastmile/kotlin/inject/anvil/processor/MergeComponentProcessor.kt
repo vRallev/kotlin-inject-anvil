@@ -174,6 +174,22 @@ internal class MergeComponentProcessor(
                     origin.requireQualifiedName() !in excludeNames
                 }
             }
+            .filter { contributedInterface ->
+                // Skip contributions whose origin references types unavailable on the current
+                // compilation target (e.g. JVM-only supertypes when compiling for JS).
+                contributedInterface.originChain().all { origin ->
+                    val resolvable = origin.superTypes.all { ref ->
+                        !ref.resolve().isError
+                    }
+                    if (!resolvable) {
+                        logger.warn(
+                            "Skipping ${origin.requireQualifiedName()}: " +
+                                "has unresolvable supertypes on this target.",
+                        )
+                    }
+                    resolvable
+                }
+            }
             .filter {
                 !it.isAnnotationPresent(Subcomponent::class) ||
                     it.contributedSubcomponent().requireQualifiedName() !in excludeNames

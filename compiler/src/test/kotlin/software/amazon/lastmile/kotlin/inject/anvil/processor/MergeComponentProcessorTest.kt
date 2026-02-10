@@ -685,6 +685,88 @@ class MergeComponentProcessorTest {
         }
     }
 
+    @Test
+    fun `contributions with unresolvable supertypes are skipped`() {
+        // Round 1: compile a base type that will become
+        // "unavailable" in the final round.
+        val round1 = compile(
+            """
+            package software.amazon.test
+
+            interface JvmOnlyBase
+            """,
+        )
+
+        // Round 2: compile a @ContributesTo interface that
+        // extends JvmOnlyBase.  The KSP processor generates
+        // a lookup-package interface with @Origin.
+        val round2 = compile(
+            """
+            package software.amazon.test
+
+            import software.amazon.lastmile.kotlin.inject.anvil.AppScope
+            import software.amazon.lastmile.kotlin.inject.anvil.ContributesTo
+
+            @ContributesTo(AppScope::class)
+            interface HasJvmSuper : JvmOnlyBase
+            """,
+            previousCompilationResult = round1,
+        )
+
+        // Round 3: compile the @MergeComponent with only
+        // round 2 on the classpath. JvmOnlyBase (from round 1)
+        // is NOT on this classpath, so HasJvmSuper's supertype
+        // resolves as an error type — the filter must skip it.
+        compile(
+            """
+            package software.amazon.test
+
+            import me.tatarka.inject.annotations.Component
+            import me.tatarka.inject.annotations.Provides
+            import software.amazon.lastmile.kotlin.inject.anvil.AppScope
+            import software.amazon.lastmile.kotlin.inject.anvil.ContributesTo
+            import software.amazon.lastmile.kotlin.inject.anvil.MergeComponent
+            import software.amazon.lastmile.kotlin.inject.anvil.SingleIn
+
+            @ContributesTo(AppScope::class)
+            interface StringComponent {
+                @Provides fun provideString(): String = "abc"
+            }
+
+            @Component
+            @MergeComponent(AppScope::class)
+            @SingleIn(AppScope::class)
+            abstract class ComponentInterface :
+                ComponentInterfaceMerged {
+                abstract val string: String
+            }
+            """,
+            allWarningsAsErrors = false,
+            previousCompilationResult = round2,
+        ) {
+            // StringComponent should be merged.
+            assertThat(
+                stringComponent.isAssignableFrom(
+                    componentInterface,
+                ),
+            ).isTrue()
+
+            // The merged interface should only list
+            // StringComponent (from the current round),
+            // not the unresolvable HasJvmSuper contribution.
+            val merged = componentInterface.mergedComponent
+            val superNames = merged.interfaces
+                .map { it.name }
+            assertThat(superNames).contains(
+                "$LOOKUP_PACKAGE" +
+                    ".SoftwareAmazonTestStringComponent",
+            )
+            assertThat(
+                superNames.any { "HasJvmSuper" in it },
+            ).isFalse()
+        }
+    }
+
     private val JvmCompilationResult.stringComponent: Class<*>
         get() = classLoader.loadClass("software.amazon.test.StringComponent")
 
