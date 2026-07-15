@@ -4,6 +4,26 @@
 [![CI](https://github.com/amzn/kotlin-inject-anvil/workflows/CI/badge.svg)](https://github.com/amzn/kotlin-inject-anvil/actions?query=branch%3Amain)
 [![Slack channel](https://img.shields.io/badge/chat-slack-blue.svg?logo=slack)](https://kotlinlang.slack.com/messages/kotlin-inject/)
 
+## Maintenance mode
+
+kotlin-inject-anvil is in maintenance mode. The last meaningful release was over a year ago. The
+project is stable and no critical changes are needed. I'm happy to make critical bug fixes in 
+case the KSP integration breaks, but nothing further.
+
+We moved our projects from kotlin-inject-(anvil) to [Metro](https://github.com/zacsweers/metro, 
+which is a better solution long term.
+
+## Project Ownership
+
+kotlin-inject-anvil was originally developed at Amazon. Ownership has since moved away from
+Amazon, and this repository is now maintained independently under
+`vRallev/kotlin-inject-anvil` by the original author of kotlin-inject-anvil.
+
+Some package names, Maven coordinates, and historical documentation still use
+`software.amazon.app.platform` for source and binary compatibility.
+
+## Overview
+
 [kotlin-inject](https://github.com/evant/kotlin-inject) is a compile-time dependency injection
 framework for Kotlin Multiplatform similar to Dagger 2 for Java.
 [Anvil](https://github.com/square/anvil) extends Dagger 2 to simplify dependency injection.
