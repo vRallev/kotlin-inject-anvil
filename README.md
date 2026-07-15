@@ -10,7 +10,7 @@ kotlin-inject-anvil is in maintenance mode. The last meaningful release was over
 project is stable and no critical changes are needed. I'm happy to make critical bug fixes in 
 case the KSP integration breaks, but nothing further.
 
-We moved our projects from kotlin-inject-(anvil) to [Metro](https://github.com/zacsweers/metro, 
+We moved our projects from kotlin-inject-(anvil) to [Metro](https://github.com/zacsweers/metro), 
 which is a better solution long term.
 
 ## Project Ownership
